@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tombol dengan Waktu Jeda dan Hitung Mundur</title>
+    <style>
+        #myButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: not-allowed;
+            background-color: grey;
+            border: none;
+            color: white;
+            position: relative;
+        }
+
+        #myButton.enabled {
+            cursor: pointer;
+            background-color: blue;
+        }
+
+        #countdown {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <button id="myButton" disabled>
+        Klik Saya
+        <div id="countdown">10</div>
+    </button>
+
+    <script>
+        var countdownElement = document.getElementById("countdown");
+        var button = document.getElementById("myButton");
+        var countdown = 10;
+
+        function updateCountdown() {
+            if (countdown > 0) {
+                countdown--;
+                countdownElement.innerHTML = countdown;
+            } else {
+                button.disabled = false;
+                button.classList.add("enabled");
+                countdownElement.style.display = "none";
+                clearInterval(countdownInterval);
+            }
+        }
+
+        var countdownInterval = setInterval(updateCountdown, 1000);
+
+        button.addEventListener("click", function() {
+            if (!button.disabled) {
+                window.location.href = "https://www.example.com";
+            }
+        });
+    </script>
+</body>
+</html>
